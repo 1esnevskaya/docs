@@ -16,11 +16,13 @@ const functionsData = [
           en: 'Create a date by given year, month, day.',
           cn: '根据给定的年、月和日创建日期。',
           ja: '指定された年、月、日から日付を作成します。',
+          ru: 'Создайте дату по заданному году, месяцу, дню.',
         },
         parameterDefinitions: {
           en: 'year (integer), month (1-12), date (1-31)',
           cn: '年份（整数），月份（1-12），日期（1-31）。',
-          ja: '年（整数）、月（1-12）、日（1-31）'
+          ja: '年（整数）、月（1-12）、日（1-31）',
+          ru: 'год (целое число), месяц (1-12), дата (1-31)'
         }
       },
       {
@@ -31,11 +33,13 @@ const functionsData = [
           en: 'Converts a date in text format to a serial number.',
           cn: '将文本格式的日期转换为日期序列号。',
           ja: 'テキスト形式の日付をシリアル番号に変換します。',
+          ru: 'Преобразует дату в текстовом формате в серийный номер.',
         },
         parameterDefinitions: {
           en: 'text string representing a date',
           cn: '表示日期的文本字符串',
-          ja: '日付を表す文字列'
+          ja: '日付を表す文字列',
+          ru: 'текстовая строка, представляющая дату'
         }
       },
       {
@@ -46,11 +50,13 @@ const functionsData = [
           en: 'Returns the day of the specified date.',
           cn: '返回指定日期中的日部分。',
           ja: '指定された日付の日にちを返します。',
+          ru: 'Возвращает день указанной даты.',
         },
         parameterDefinitions: {
           en: 'date value or date text string',
           cn: '日期值或日期文本字符串。',
-          ja: '日付値または日付の文字列'
+          ja: '日付値または日付の文字列',
+          ru: 'значение даты или текстовая строка даты'
         }
       },
       {
@@ -61,11 +67,13 @@ const functionsData = [
           en: 'Calculates the number of days between two dates.',
           cn: '计算两个日期之间的天数。',
           ja: '2つの日付間の日数を計算します。',
+          ru: 'Вычисляет количество дней, прошедших между двумя датами.',
         },
         parameterDefinitions: {
           en: 'end date, start date',
           cn: '结束日期，开始日期。',
-          ja: '終了日、開始日'
+          ja: '終了日、開始日',
+          ru: 'дата окончания, дата начала'
         }
       },
       {
@@ -76,11 +84,13 @@ const functionsData = [
           en: 'Calculates the number of days between two dates based on a 360-day year.',
           cn: '基于一年360天计算两个日期间的天数。',
           ja: '360日の年に基づいて2つの日付間の日数を計算します。',
+          ru: 'Вычисляет количество дней между двумя датами на основе 360-дневного года.',
         },
         parameterDefinitions: {
           en: 'start date, end date',
           cn: '起始日期，结束日期。',
-          ja: '開始日、終了日'
+          ja: '開始日、終了日',
+          ru: 'дата начала, дата окончания'
         }
       },
       {
@@ -91,11 +101,13 @@ const functionsData = [
           en: 'Returns the date that is the indicated number of months before or after the start date.',
           cn: '返回指定月份数之前或之后的日期。',
           ja: '開始日から指定された月数前後にある日付を返します。',
+          ru: 'Возвращает дату, которая соответствует указанному количеству месяцев до или после начальной даты.',
         },
         parameterDefinitions: {
           en: 'start date, months (positive for future, negative for past)',
           cn: '起始日期，月份数（正数为将来，负数为过去）。',
-          ja: '開始日、月数（未来は正、過去は負）'
+          ja: '開始日、月数（未来は正、過去は負）',
+          ru: 'начальная дата, месяцы (положительная для будущего, отрицательная для прошлого)'
         }
       },
       {
@@ -106,11 +118,13 @@ const functionsData = [
           en: 'Returns the last day of the month that is the indicated number of months before or after the start date.',
           cn: '返回指定月份数之前或之后的月末日期。',
           ja: '開始日から指定された月数前後にある月末の日付を返します。',
+          ru: 'Возвращает последний день месяца, который соответствует указанному количеству месяцев до или после даты начала.'
         },
         parameterDefinitions: {
           en: 'start date, months (positive for future, negative for past)',
           cn: '起始日期，月份数（正数为将来，负数为过去）。',
-          ja: '開始日、月数（未来は正、過去は負）'
+          ja: '開始日、月数（未来は正、過去は負）。',
+          ru: 'начальная дата, месяцы (положительная для будущего, отрицательная для прошлого)'
         }
       },
       {
@@ -121,11 +135,13 @@ const functionsData = [
           en: 'Returns the hour part of a time value.',
           cn: '返回时间中的小时部分。',
           ja: '時間値の時間を返します。',
+          ru: 'Возвращает часовую часть значения времени.',
         },
         parameterDefinitions: {
           en: 'time value or time text string',
           cn: '时间值或时间文本字符串。',
-          ja: '時間値または時間の文字列'
+          ja: '時間値または時間の文字列',
+          ru: 'значение времени или текстовая строка времени'
         }
       },
       {
@@ -136,11 +152,13 @@ const functionsData = [
           en: 'Returns the minute part of a time value.',
           cn: '返回时间中的分钟部分。',
           ja: '時間値の分を返します。',
+          ru: 'Возвращает минутную часть значения времени.',
         },
         parameterDefinitions: {
           en: 'time value or time text string',
           cn: '时间值或时间文本字符串。',
-          ja: '時間値または時間の文字列'
+          ja: '時間値または時間の文字列',
+          ru: 'значение времени или текстовая строка времени'
         }
       },
       {
@@ -151,11 +169,13 @@ const functionsData = [
           en: 'Returns the ISO week number of the year for a given date.',
           cn: '返回一年中给定日期所在的ISO周数。',
           ja: '指定された日付が属するISO週番号を返します。',
+          ru: 'Возвращает номер недели по стандарту ISO в году для заданной даты.',
         },
         parameterDefinitions: {
           en: 'date value or date text string',
           cn: '日期值或日期文本字符串。',
-          ja: '日付値または日付の文字列'
+          ja: '日付値または日付の文字列',
+          ru: 'значение даты или текстовая строка даты'
         }
       },
       {
@@ -166,11 +186,13 @@ const functionsData = [
           en: 'Returns the month part of a date value.',
           cn: '返回指定日期中的月部分。',
           ja: '日付値の月を返します。',
+          ru: 'Возвращает месячную часть значения даты.',
         },
         parameterDefinitions: {
           en: 'date value or date text string',
           cn: '日期值或日期文本字符串。',
-          ja: '日付値または日付の文字列'
+          ja: '日付値または日付の文字列',
+          ru: 'значение даты или текстовая строка даты'
         }
       },
       {
@@ -181,11 +203,13 @@ const functionsData = [
           en: 'Calculates the total number of working days between two dates, excluding weekends and specified holidays.',
           cn: '计算两个日期间的工作日数，不包括周末和指定的假期。',
           ja: '2つの日付間の平日の総数を計算し、週末と指定された休日を除きます。',
+          ru: 'Вычисляет общее количество рабочих дней между двумя датами, исключая выходные и указанные праздничные дни.',
         },
         parameterDefinitions: {
           en: 'start date, end date, optional holidays array',
           cn: '开始日期，结束日期，可选假期数组。',
-          ja: '開始日、終了日、オプションの休日配列'
+          ja: '開始日、終了日、オプションの休日配列',
+          ru: 'дата начала, дата окончания, необязательный массив праздников'
         }
       },
       {
@@ -196,11 +220,13 @@ const functionsData = [
           en: 'Calculates the total number of working days between two dates, allowing for custom weekends, and excluding specified holidays.',
           cn: '计算两个日期间的工作日数，允许自定义周末，并排除指定假期。',
           ja: '2つの日付間の平日の総数を計算し、カスタム週末を許可し、指定された休日を除きます。',
+          ru: 'Вычисляет общее количество рабочих дней между двумя датами с учетом пользовательских выходных и без учета указанных праздничных дней.',
         },
         parameterDefinitions: {
           en: 'start date, end date, weekend pattern, optional holidays array',
           cn: '开始日期，结束日期，周末模式，可选假期数组。',
-          ja: '開始日、終了日、週末パターン、オプションの休日配列'
+          ja: '開始日、終了日、週末パターン、オプションの休日配列',
+          ru: 'дата начала, дата окончания, шаблон выходных дней, дополнительный массив праздников'
         }
       },
       {
@@ -211,11 +237,13 @@ const functionsData = [
           en: 'Returns the current date and time.',
           cn: '返回当前日期和时间。',
           ja: '現在の日付と時刻を返します。',
+          ru: 'Возвращает текущую дату и время.',
         },
         parameterDefinitions: {
           en: 'no parameters',
           cn: '无参数。',
-          ja: 'パラメータなし'
+          ja: 'パラメータなし',
+          ru: 'никаких параметров'
         }
       },
       {
@@ -226,11 +254,13 @@ const functionsData = [
           en: 'Returns the second part of a time value.',
           cn: '返回时间中的秒部分。',
           ja: '時間値の秒を返します。',
+          ru: 'Возвращает вторую часть значения времени.',
         },
         parameterDefinitions: {
           en: 'time value or time text string',
           cn: '时间值或时间文本字符串。',
-          ja: '時間値または時間の文字列'
+          ja: '時間値または時間の文字列',
+          ru: 'значение времени или текстовая строка времени'
         }
       },
       {
@@ -241,11 +271,13 @@ const functionsData = [
           en: 'Creates a time from the given hour, minute, and second.',
           cn: '根据给定的小时、分钟和秒创建时间。',
           ja: '指定された時間、分、秒から時間を作成します。',
+          ru: 'Создает время на основе заданных часа, минуты и секунды.',
         },
         parameterDefinitions: {
           en: 'hour (0-23), minute (0-59), second (0-59)',
           cn: '小时（0-23），分钟（0-59），秒（0-59）。',
-          ja: '時間（0-23）、分（0-59）、秒（0-59）'
+          ja: '時間（0-23）、分（0-59）、秒（0-59）',
+          ru: 'часы (0-23), минуты (0-59), секунды (0-59)'
         }
       },
       {
@@ -256,11 +288,13 @@ const functionsData = [
           en: 'Converts a time in text format to a time serial number.',
           cn: '将文本格式的时间转换为时间序列号。',
           ja: 'テキスト形式の時間を時間のシリアル番号に変換します。',
+          ru: 'Преобразует время в текстовом формате в порядковый номер времени.',
         },
         parameterDefinitions: {
           en: 'text string representing a time',
           cn: '文本字符串，表示时间。',
-          ja: '時間を表す文字列'
+          ja: '時間を表す文字列',
+          ru: 'текстовая строка, представляющая время'
         }
       },
       {
@@ -305,7 +339,8 @@ const functionsData = [
         parameterDefinitions: {
           en: 'date value or date text string',
           cn: '日期值或日期文本字符串。',
-          ja: '日付値または日付の文字列'
+          ja: '日付値または日付の文字列',
+          ru: ''
         }
       },
       {
