@@ -1,27 +1,27 @@
 # ACL
 
-## Overview
+## Обзор
 
-`ACL` is the permission management module used in NocoBase, responsible for user role management, permission registration and authorization, as well as permission policy evaluation and access control.
+ACL - это модуль управления разрешениями, используемый в NocoBase, который отвечает за управление ролями пользователей, регистрацию разрешений и авторизацию, а также за оценку политики разрешений и контроль доступа.
 
-### Concepts
+### Концепции
 
-- **Resource**: Collections, or custom resources can be registered. Refer to [`@nocobase/resourcer`](../resourcer/resource-manager.md).
-- **Action**: An operation interface for a resource, such as create, read, update, delete, or other custom actions. Refer to [`@nocobase/actions`](../actions).
-- **Strategy**: Configures global permissions for roles, such as permissions for resource operations like create, read, update, delete, import, export, and system permissions like configuring the user interface.
-- **Snippet**: Defines a collection of operations, enabling unified management of operation permissions. Snippet identifiers can be matched using the [minimatch](https://github.com/isaacs/minimatch) rules.
+- **Ресурс**: Можно зарегистрировать коллекции или пользовательские ресурсы. Обратитесь к [`@nocobase/resourcer`](../resourcer/resource-manager.md).
+- **Действие**: интерфейс управления ресурсом, такой как создание, чтение, обновление, удаление или другие пользовательские действия. Обратитесь к [`@nocobase/actions`](../действия).
+- **Стратегия**: Настраивает глобальные разрешения для ролей, такие как разрешения на операции с ресурсами, такие как создание, чтение, обновление, удаление, импорт, экспорт, и системные разрешения, такие как настройка пользовательского интерфейса.
+- **Сниппет**: Определяет набор операций, позволяя унифицировать управление разрешениями на операции. Идентификаторы сниппета могут быть сопоставлены с помощью правил [минимального соответствия](https://github.com/isaacs/minimatch).
 
-## Class Methods
+## Методы класса
 
-### `define()`
+### define()
 
-Defines a role.
+Определяет роль.
 
-#### Signature
+#### Подпись
 
-- `define(options: DefineOptions): ACLRole`
+- `define(параметры: DefineOptions): ACLRole`
 
-#### Type Definitions
+#### Определения типов
 
 ```typescript
 export interface DefineOptions {
@@ -51,45 +51,48 @@ export interface RoleActionParams {
 }
 ```
 
-#### Details
+#### Подробности
 
-##### DefineOptions
+##### Определите варианты
 
-| Property   | Type                                                                | Description                                                       |
-| ---------- | ------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `role`     | `string`                                                            | Unique identifier for the role                                    |
-| `strategy` | `string` \| [`AvailableStrategyOptions`](#availablestrategyoptions) | Optional, global access strategy for the role                     |
-| `actions`  | [`{ [actionName: string]: RoleActionParams; }`](#roleactionparams)  | Optional, permission configuration for actions                    |
-| `snippets` | `string[]`                                                          | Optional, defines snippets that the role has permission to access |
 
-##### AvailableStrategyOptions
+| Свойство    | Тип данных                                                                 | Описание                                                          |
+|------------|---------------------------------------------------------------------------|------------------------------------------------------------------|
+| `role`     | `string`                                                                  | Уникальный идентификатор роли                                    |
+| `strategy` | `string` \| [`AvailableStrategyOptions`](#availablestrategyoptions)       | Опционально, глобальная стратегия доступа для роли               |
+| `actions`  | [`{ [actionName: string]: RoleActionParams; }`](#roleactionparams)        | Опционально, конфигурация разрешений для действий                |
+| `snippets` | `string[]`                                                                | Опционально, определяет сниппеты, к которым есть доступ у роли   |
 
-| Property         | Type                              | Description                                               |
-| ---------------- | --------------------------------- | --------------------------------------------------------- |
-| `displayName`    | `string`                          | Optional, display name for the strategy                   |
-| `action`         | `false` \| `string` \| `string[]` | Optional, operation interfaces                            |
-| `allowConfigure` | `boolean`                         | Optional, whether to allow configuring the user interface |
-| `resource`       | `*`                               | Applies to all resources                                  |
+##### Доступные варианты стратегии
 
-##### RoleActionParams
+| Свойство         | Тип                              | Описание                                                  |
+|------------------|----------------------------------|-----------------------------------------------------------|
+| `displayName`    | `string`                         | Опционально, отображаемое название стратегии              |
+| `action`         | `false` \| `string` \| `string[]` | Опционально, доступные операции                           |
+| `allowConfigure` | `boolean`                        | Опционально, разрешена ли настройка пользовательского интерфейса |
+| `resource`       | `*`                              | Применяется ко всем ресурсам                              |
 
-| Property    | Type       | Description                                                                                            |
-| ----------- | ---------- | ------------------------------------------------------------------------------------------------------ |
-| `fields`    | `string[]` | Optional, fields of the data table to operate on                                                       |
-| `filter`    | `any`      | Optional, filter parameters that must be met, only records that meet the conditions can be operated on |
-| `own`       | `boolean`  | Optional, whether to operate only on records created by oneself                                        |
-| `whitelist` | `string[]` | Optional, whitelist of fields that can be accessed, only fields in the whitelist can be accessed       |
-| `blacklist` | `string[]` | Optional, blacklist of fields that cannot be accessed, fields in the blacklist cannot be accessed      |
+##### Параметры ролевого действия
 
-### `can()`
+| Свойство    | Тип        | Описание                                                                                             |
+|------------|------------|------------------------------------------------------------------------------------------------------|
+| `fields`   | `string[]` | Опционально, поля таблицы данных для операций                                                       |
+| `filter`   | `any`      | Опционально, параметры фильтрации - операции доступны только для записей, соответствующих условиям  |
+| `own`      | `boolean`  | Опционально, ограничение операций только записями, созданными текущим пользователем                 |
+| `whitelist`| `string[]` | Опционально, белый список доступных полей - разрешены только поля из списка                         |
+| `blacklist`| `string[]` | Опционально, черный список запрещенных полей - поля из списка недоступны                            |
 
-Determines the permission to execute an action and returns the final action parameters. Returns `null` if no permission.
 
-#### Signature
 
-- `can(options: CanArgs): CanResult | null`
+### can()
 
-#### Type Definitions
+Определяет разрешение на выполнение действия и возвращает окончательные параметры действия. Возвращает `null`, если разрешение отсутствует.
+
+#### Подпись
+
+- `can(параметры: CanArgs): CanResult | null`
+
+#### Определения типов
 
 ```typescript
 interface CanArgs {
@@ -107,35 +110,35 @@ interface CanResult {
 }
 ```
 
-#### Details
+#### Детали
 
 ##### CanArgs
 
-| Property   | Type     | Description               |
-| ---------- | -------- | ------------------------- |
-| `role`     | `string` | Role identifier           |
-| `resource` | `string` | Resource identifier       |
-| `action`   | `string` | Action identifier         |
-| `ctx`      | `any`    | Optional, request context |
+| Свойство    | Тип      | Описание                            |
+|------------|----------|-------------------------------------|
+| `role`     | `string` | Идентификатор роли                 |
+| `resource` | `string` | Идентификатор ресурса              |
+| `action`   | `string` | Идентификатор действия             |
+| `ctx`      | `any`    | Опционально, контекст запроса      |
 
 ##### CanResult
 
-| Property   | Type     | Description                 |
-| ---------- | -------- | --------------------------- |
-| `role`     | `string` | Role identifier             |
-| `resource` | `string` | Resource identifier         |
-| `action`   | `string` | Action identifier           |
-| `params`   | `any`    | Optional, action parameters |
+| Свойство   | Тип      | Описание                      |
+|------------|----------|------------------------------|
+| `role`     | `string` | Идентификатор роли           |
+| `resource` | `string` | Идентификатор ресурса        |
+| `action`   | `string` | Идентификатор действия       |
+| `params`   | `any`    | Опциональные параметры действия |
 
-### `registerSnippet()`
+### registerSnippet()
 
-Registers a snippet.
+Записывает фрагмент
 
-#### Signature
+#### Подпись
 
-- `registerSnippet(snippet: SnippetOptions)`
+- registerSnippet(snippet: snippetOptions)
 
-#### Type Definitions
+#### Определения типов
 
 ```typescript
 export type SnippetOptions = {
@@ -144,20 +147,17 @@ export type SnippetOptions = {
 };
 ```
 
-#### Details
+#### Детали
 
-| Property  | Type       | Description                                                                                                                              |
-| --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`    | `string`   | Snippet identifier, can be matched using the [minimatch](https://github.com/isaacs/minimatch) rules. E.g., `auth.auth` matches `auth.*`. |
-| `actions` | `string[]` | Resource operations included in the snippet, in the format `resource:action`. E.g., `users:list`.                                        |
+| Свойство  | Тип        | Описание                                                                                                                              |
+|----------|------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `name`    | `string`   | Идентификатор сниппета. Может использовать правила [minimatch](https://github.com/isaacs/minimatch) для сопоставления. Например, `auth.auth` соответствует `auth.*`. |
+| `actions` | `string[]` | Операции с ресурсами, включенные в сниппет, в формате `ресурс:действие`. Например, `users:list`.                                        |
 
-### `setAvailableAction()`
+### setAvailableAction()
 
-Sets allowed actions.
-
-#### Signature
-
-- `setAvailableAction(name: string, options: AvailableActionOptions = {})`
+#### Подпись
+- setAvailableAction(name: string, options: AvailableActionOptions = {})
 
 ```typescript
 export interface AvailableActionOptions {
@@ -171,61 +171,60 @@ export interface AvailableActionOptions {
 }
 ```
 
-#### Details
+#### Детали
 
-| Property               | Type                   | Description                                                                           |
-| ---------------------- | ---------------------- | ------------------------------------------------------------------------------------- |
-| `displayName`          | `string`               | Optional, display name for the action                                                 |
-| `aliases`              | `string` \| `string[]` | Optional, action aliases. E.g., aliases for `get`, `list` operations are both `view`. |
-| `resource`             | `string`               | Optional, resource                                                                    |
-| `onNewRecord`          | `boolean`              | Optional, whether the operation applies to new data, such as create operation         |
-| `allowConfigureFields` | `boolean`              | Optional, whether to allow configuring fields                                         |
+| Свойство               | Тип                    | Описание                                                                              |
+|------------------------|------------------------|---------------------------------------------------------------------------------------|
+| `displayName`          | `string`               | Опционально, отображаемое название действия                                          |
+| `aliases`              | `string` \| `string[]` | Опционально, псевдонимы действия. Например, псевдоним `view` для операций `get` и `list`. |
+| `resource`             | `string`               | Опционально, связанный ресурс                                                        |
+| `onNewRecord`          | `boolean`              | Опционально, применяется ли операция к новым данным (например, операция создания)     |
+| `allowConfigureFields` | `boolean`              | Опционально, разрешена ли настройка полей                                            |
 
-### `setAvailableStrategy()`
+### setAvailableStrategy()
 
-Sets allowed strategies for actions.
+Устанавливает допустимые стратегии для действий.
 
-#### Signature
+#### Подпись
 
-- `setAvailableStrategy(name: string, options: AvailableStrategyOptions)`
+- `setAvailableStrategy(имя: строка, параметры: доступные параметры стратегии)`
 
-Refer to [AvailableStrategyOptions](#availablestrategyoptions).
+Обратитесь к [Доступным стратегическим вариантам](#доступные стратегические варианты).
 
-### `allow()`
+### allow()
 
-Defines the conditions under which operations are allowed.
+Определяет условия, при которых разрешены операции
 
-```typescript
-acl.allow('plugins', '*', 'public');
-```
+``typescript
+acl.allow("плагины", "*", "общедоступный");
 
-#### Signature
+#### Подпись
 
 - `allow(resourceName: string, actionNames: string[] | string, condition?: string | ConditionFunc)`
 
-#### Type
+#### Тип
 
 ```typescript
 export type ConditionFunc = (ctx: any) => Promise<boolean> | boolean;
 ```
 
-#### Details
+#### Детали
 
-| Parameter      | Type                        | Description                                                                 | Default  |
-| -------------- | --------------------------- | --------------------------------------------------------------------------- | -------- |
-| `resourceName` | `string`                    | Resource                                                                    | -        |
-| `actionNames`  | `string` \| `string[]`      | Action                                                                      | -        |
-| `condition`    | `string` \| `ConditionFunc` | Optional, predefined condition identifier, or condition evaluation function | `public` |
+| Параметр       | Тип                        | Описание                                                                 | По умолчанию |
+|----------------|----------------------------|--------------------------------------------------------------------------|--------------|
+| `resourceName` | `string`                   | Название ресурса                                                        | -            |
+| `actionNames`  | `string` \| `string[]`     | Название действия(ий)                                                   | -            |
+| `condition`    | `string` \| `ConditionFunc` | Опционально: предопределенный идентификатор условия или функция проверки | `public`     |
 
-Predefined condition identifiers:
+**Предопределенные условия:**
 
-- `public`: Public interface.
-- `loggedIn`: Allowed when the user is logged in.
-- `allowConfigure`: Allowed when the current user role has permission to configure the user interface.
+- `public`: Публичный интерфейс (доступ всем)
+- `loggedIn`: Требуется авторизация (доступ только аутентифицированным пользователям)
+- `allowConfigure`: Требуются права на конфигурацию (доступ только ролям с соответствующим разрешением)
 
-### `addFixedParams()`
+### addFixedParams()
 
-Adds fixed parameters to operations, merging them with current request parameters.
+Добавляет фиксированные параметры к операциям, объединяя их с текущими параметрами запроса.
 
 ```typescript
 acl.addFixedParams('users', 'list', () => {
@@ -239,27 +238,28 @@ acl.addFixedParams('users', 'list', () => {
 });
 ```
 
-#### Signature
+#### Подпись
 
-- `addFixedParams(resource: string, action: string, merger: Merger)`
+- addFixedParams(resource: string, action: string, merger: Merger)
 
-#### Type Definitions
+#### Определения типов
 
 ```typescript
 export type Merger = () => object;
 ```
 
-#### Details
+#### Детали
 
-| Parameter  | Type     | Description                                               |
-| ---------- | -------- | --------------------------------------------------------- |
-| `resource` | `string` | Resource                                                  |
-| `action`   | `string` | Action                                                    |
-| `merger`   | `Merger` | Function returning the fixed parameter object to be added |
+| Параметр   | Тип      | Описание                                                                 |
+|------------|----------|--------------------------------------------------------------------------|
+| `resource` | `string` | Название ресурса                                                        |
+| `action`   | `string` | Название действия                                                       |
+| `merger`   | `Merger` | Функция, возвращающая фиксированный объект параметров для добавления    |
 
-### `use()`
 
-Adds the `ACL` middleware.
+### use()
+
+Добавляет промежуточное программное обеспечение ACL
 
 ```typescript
 acl.use(async () => {
@@ -270,14 +270,14 @@ acl.use(async () => {
 });
 ```
 
-#### Signature
+#### Подпись
 
-- `use(fn: any, options?: ToposortOptions)`
+- use(fn: any, options?: ToposortOptions)
 
-#### Details
+#### Подробности
 
-Refer to [Middleware](../../development/server/middleware).
+См. в разделе [Промежуточное программное обеспечение](../../разработка/сервер/промежуточное программное обеспечение).
 
-### `middleware()`
+### Промежуточное программное обеспечение
 
-NocoBase access control middleware.
+Промежуточное программное обеспечение для контроля доступа NocoBase.
